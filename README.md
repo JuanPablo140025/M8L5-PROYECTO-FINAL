@@ -4,7 +4,7 @@ Le sirve a un jugador para llevar un registro de los videojuegos que tiene pendi
 
 ## 🚀 Demo
 - **App (Frontend):** https://m8-l5-proyecto-final.vercel.app
-- **API (Backend):** https://m8l5-proyecto-final.onrender.coma
+- **API (Backend):** https://m8l5-proyecto-final.onrender.com
 - **Cuenta de prueba:** `julianelprositoxd@gmail.com` / `234561` 
 
 ## 🛠️ Stack Tecnológico

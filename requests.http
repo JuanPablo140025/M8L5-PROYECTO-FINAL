@@ -1,5 +1,8 @@
 ### Variables
-@host = http://localhost:3000
+# Cambia el '#' de lugar según dónde quieras probar (Local o Render)
+@host = https://m8l5-proyecto-final.onrender.com
+# @host = http://localhost:3000
+
 @token = TU_TOKEN_JWT_AQUI
 
 ### 1. Chequeo de Salud
@@ -41,13 +44,31 @@ Content-Type: application/json
   "rating": 5
 }
 
-### 6. Ruta Admin
+### 6. Actualizar juego (Reemplaza el '1' por el ID de tu juego)
+PUT {{host}}/juegos/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "estado": "Completado",
+  "horas_jugadas": 15,
+  "rating": 5
+}
+
+### 7. Eliminar juego (Reemplaza el '1' por el ID de tu juego)
+DELETE {{host}}/juegos/1
+Authorization: Bearer {{token}}
+
+### 8. Ruta Admin
 GET {{host}}/admin/estadisticas
 Authorization: Bearer {{token}}
 
-### PRUEBAS DE SEGURIDAD QUE DEBEN FALLAR:
 
-### Caso Falla 1: Inyección SQL
+# ========================================================
+# PRUEBAS DE SEGURIDAD QUE DEBEN FALLAR (OBLIGATORIAS)
+# ========================================================
+
+### Caso Falla 1: Inyección SQL (Debe ser bloqueado)
 POST {{host}}/auth/login
 Content-Type: application/json
 
@@ -56,10 +77,10 @@ Content-Type: application/json
   "password": "password"
 }
 
-### Caso Falla 2: Sin Token (401)
+### Caso Falla 2: Sin Token (Debe responder 401 Unauthorized)
 GET {{host}}/juegos
 
-### Caso Falla 3: Input Inválido (400)
+### Caso Falla 3: Input Inválido (Debe responder 400 Bad Request)
 POST {{host}}/juegos
 Authorization: Bearer {{token}}
 Content-Type: application/json

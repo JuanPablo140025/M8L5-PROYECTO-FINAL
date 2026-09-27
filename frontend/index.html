@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RetroQuest - Backlog & Collection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="crt">
+  <div class="container">
+    <header class="retro-header">
+      <h1 class="pixel-title">🕹️ RETROQUEST</h1>
+      <p class="subtitle">BIT-BASED BACKLOG & COLLECTION TRACKER</p>
+    </header>
+
+    <div id="banner-error" class="banner banner-error hidden"></div>
+    <div id="banner-exito" class="banner banner-exito hidden"></div>
+
+    <section id="sec-auth" class="retro-box">
+      <div class="tabs">
+        <button type="button" id="btn-tab-login" class="tab-btn active">INICIAR SESIÓN</button>
+        <button type="button" id="btn-tab-registro" class="tab-btn">REGISTRARSE</button>
+      </div>
+
+      <form id="form-login" class="auth-form">
+        <label>EMAIL:</label>
+        <input type="email" id="login-email" required placeholder="admin@retroquest.com">
+        <label>PASSWORD:</label>
+        <input type="password" id="login-password" required placeholder="********">
+        <button type="submit" class="pixel-btn">PRESS START ➔</button>
+      </form>
+
+      <form id="form-registro" class="auth-form hidden">
+        <label>NOMBRE GAMER:</label>
+        <input type="text" id="reg-nombre" required placeholder="Mario">
+        <label>EMAIL:</label>
+        <input type="email" id="reg-email" required placeholder="mario@mushroom.com">
+        <label>PASSWORD (MIN 6 CHARS):</label>
+        <input type="password" id="reg-password" required placeholder="********">
+        <button type="submit" class="pixel-btn">CREAR CUENTA 🌟</button>
+      </form>
+    </section>
+
+    <section id="sec-dashboard" class="hidden">
+      <div class="top-bar retro-box">
+        <div>
+          <span class="user-info">PLAYER: <strong id="lbl-usuario-nombre">...</strong></span>
+          <span id="badge-admin" class="badge-admin hidden">ADMIN</span>
+        </div>
+        <div>
+          <button id="btn-admin-panel" class="pixel-btn btn-sec hidden">PANEL ADMIN</button>
+          <button id="btn-logout" class="pixel-btn btn-danger">EXIT ✖</button>
+        </div>
+      </div>
+
+      <div class="retro-box margin-top">
+        <h2 id="form-juego-titulo">AGREGAR JUEGO AL BACKLOG</h2>
+        <form id="form-juego" class="grid-form">
+          <input type="hidden" id="juego-id">
+          <div>
+            <label>TÍTULO:</label>
+            <input type="text" id="juego-titulo" required placeholder="Ej. Chrono Trigger">
+          </div>
+          <div>
+            <label>PLATAFORMA:</label>
+            <input type="text" id="juego-plataforma" required placeholder="Ej. SNES / Arcade">
+          </div>
+          <div>
+            <label>ESTADO:</label>
+            <select id="juego-estado">
+              <option value="Pendiente">Pendiente</option>
+              <option value="Jugando">Jugando</option>
+              <option value="Completado">Completado</option>
+              <option value="Abandonado">Abandonado</option>
+            </select>
+          </div>
+          <div>
+            <label>HORAS JUGADAS:</label>
+            <input type="number" id="juego-horas" min="0" value="0">
+          </div>
+          <div>
+            <label>RATING (1-5 ⭐):</label>
+            <input type="number" id="juego-rating" min="1" max="5" value="5">
+          </div>
+          <div class="btn-group">
+            <button type="submit" id="btn-guardar-juego" class="pixel-btn">GUARDAR 💾</button>
+            <button type="button" id="btn-cancelar-edit" class="pixel-btn btn-sec hidden">CANCELAR</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="retro-box margin-top">
+        <h2>TU COLECCIÓN</h2>
+
+        <div id="estado-cargando" class="estado-box hidden">
+          <p class="blink">CARGANDO DATOS DESDE EL CARTUCHO...</p>
+        </div>
+
+        <div id="estado-vacio" class="estado-box hidden">
+          <p>NO TIENES JUEGOS EN TU COLECCIÓN TODAVÍA. ¡AGREGA EL PRIMERO ARRIBA!</p>
+        </div>
+
+        <div id="estado-exito" class="table-responsive hidden">
+          <table class="pixel-table">
+            <thead>
+              <tr>
+                <th>TÍTULO</th>
+                <th>PLATAFORMA</th>
+                <th>ESTADO</th>
+                <th>HORAS</th>
+                <th>RATING</th>
+                <th>ACCIONES</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-juegos-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

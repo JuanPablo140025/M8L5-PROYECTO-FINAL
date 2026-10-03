@@ -17,4 +17,4 @@ pool.on('error', (err) => {
   console.error('❌ Error inesperado en el cliente de PostgreSQL:', err.message);
 });
 
-module.exports = pool;s
+module.exports = pool;

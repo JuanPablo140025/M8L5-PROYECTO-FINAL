@@ -1,3 +1,5 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
@@ -15,4 +17,4 @@ pool.on('error', (err) => {
   console.error('❌ Error inesperado en el cliente de PostgreSQL:', err.message);
 });
 
-module.exports = pool;
+module.exports = pool;s

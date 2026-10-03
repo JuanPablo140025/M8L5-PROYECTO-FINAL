@@ -1,5 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
-
+const API_URL = 'https://m8l5-proyecto-final.onrender.com/api';
 // Referencias a elementos del DOM
 const btnTabLogin = document.getElementById('btn-tab-login');
 const btnTabRegistro = document.getElementById('btn-tab-registro');

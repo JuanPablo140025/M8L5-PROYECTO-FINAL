@@ -1,33 +1,30 @@
 # 🎮 RetroQuest - Bit-Based Backlog & Collection Tracker
 
-Le sirve a un jugador para llevar un registro de los videojuegos que tiene pendientes o en colección, sustituyendo las notas sueltas del celular por una plataforma retro centralizada.
+Plataforma web para llevar el registro de videojuegos pendientes y completados con interfaz estilo retro.
 
 ## 🚀 Demo
 - **App (Frontend):** https://m8-l5-proyecto-final.vercel.app
 - **API (Backend):** https://m8l5-proyecto-final.onrender.com
-- **Cuenta de prueba:** `julianelprositoxd@gmail.com` / `234561` 
+- **Cuenta de prueba:** `juan.test@example.com` / `Password123!`
 
 ## 🛠️ Stack Tecnológico
-- **Backend:** Node.js, Express, `pnpm`
+- **Backend:** Node.js, Express, pnpm
 - **Base de Datos:** PostgreSQL en Supabase
-- **Seguridad & Autenticación:** JWT, bcrypt, Helmet, Express-Rate-Limit, CORS
-- **Frontend:** HTML5, CSS3 (Pixel Art CSS), JavaScript vanila (`fetch` API, `textContent`)
+- **Seguridad:** JWT, bcrypt, Helmet, Express-Rate-Limit, CORS
+- **Frontend:** HTML5, CSS3 (Pixel Art CSS), JavaScript Vánila
 
-## 📡 Endpoints de la API
+## 📌 Endpoints de la API
+- `POST /api/auth/registro` - Registrar usuario
+- `POST /api/auth/login` - Iniciar sesión
+- `GET /api/juegos` - Listar juegos del usuario autenticado
+- `POST /api/juegos` - Crear juego
+- `PUT /api/juegos/:id` - Actualizar juego
+- `DELETE /api/juegos/:id` - Eliminar juego
+- `GET /api/admin/estadisticas` - Métricas del sistema (Requiere rol Admin)
 
-| Método | Ruta | Protegida | Rol requerido | Descripción |
-|---|---|---|---|---|
-| `POST` | `/api/auth/registro` | No | N/A | Registra un nuevo usuario con hash de clave |
-| `POST` | `/api/auth/login` | No | N/A | Autentica y devuelve el JWT con expiración |
-| `GET` | `/api/juegos` | Sí | User | Obtiene solo los juegos del usuario autenticado |
-| `POST` | `/api/juegos` | Sí | User | Agrega un nuevo juego a la colección |
-| `PUT` | `/api/juegos/:id` | Sí | User | Actualiza estado, horas o rating de un juego |
-| `DELETE` | `/api/juegos/:id` | Sí | User | Elimina un juego de la colección |
-| `GET` | `/api/admin/metrics` | Sí | Admin | Ruta protegida solo accesible para rol `admin` |
-
-## 💻 Cómo correrlo en local
+## 💻 Instrucciones para ejecución local
 
 1. Clonar el repositorio:
    ```bash
-   git clone [https://github.com/TU_USUARIO/RetroQuest.git](https://github.com/TU_USUARIO/RetroQuest.git)
-   cd RetroQuest/backend
+   git clone [https://github.com/JuanPablo140025/M8L5-PROYECTO-FINAL.git](https://github.com/JuanPablo140025/M8L5-PROYECTO-FINAL.git)
+   cd M8L5-PROYECTO-FINAL

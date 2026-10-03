@@ -12,18 +12,40 @@ async function crearJuego(userId, datos) {
   const { titulo, plataforma, estado, horas_jugadas, rating } = datos;
   const res = await pool.query(
     'INSERT INTO juegos (user_id, titulo, plataforma, estado, horas_jugadas, rating) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-    [userId, titulo, plataforma, estado || 'Pendiente', horas_jugadas || 0, rating || 5]
+    [
+      userId, 
+      titulo, 
+      plataforma, 
+      estado || 'Pendiente', 
+      horas_jugadas !== undefined ? horas_jugadas : 0, 
+      rating !== undefined ? rating : 5
+    ]
   );
   return res.rows[0];
 }
 
 async function actualizarJuego(juegoId, userId, datos) {
   const { titulo, plataforma, estado, horas_jugadas, rating } = datos;
+  
+  // COALESCE mantiene el valor actual de la columna si el parámetro entrante es NULL
   const res = await pool.query(
     `UPDATE juegos 
-     SET titulo = $1, plataforma = $2, estado = $3, horas_jugadas = $4, rating = $5
-     WHERE id = $6 AND user_id = $7 RETURNING *`,
-    [titulo, plataforma, estado, horas_jugadas, rating, juegoId, userId]
+     SET titulo = COALESCE($1, titulo),
+         plataforma = COALESCE($2, plataforma),
+         estado = COALESCE($3, estado),
+         horas_jugadas = COALESCE($4, horas_jugadas),
+         rating = COALESCE($5, rating)
+     WHERE id = $6 AND user_id = $7 
+     RETURNING *`,
+    [
+      titulo !== undefined ? titulo : null,
+      plataforma !== undefined ? plataforma : null,
+      estado !== undefined ? estado : null,
+      horas_jugadas !== undefined ? horas_jugadas : null,
+      rating !== undefined ? rating : null,
+      juegoId,
+      userId
+    ]
   );
 
   if (res.rows.length === 0) {

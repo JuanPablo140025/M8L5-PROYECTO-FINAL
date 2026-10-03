@@ -12,11 +12,27 @@ const adminRoutes = require('./routes/admin.routes');
 
 const app = express();
 
+// Confianza en el proxy inverso de Render (Necesario para que express-rate-limit lea las IPs reales)
+app.set('trust proxy', 1);
+
 app.use(helmet());
 
-// Permitir solicitudes CORS en desarrollo local
+// Configuración de CORS usando la variable de entorno FRONTEND_URL o el dominio desplegado en Vercel
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'https://m8-l5-proyecto-final.vercel.app',
+  'http://localhost:5500',
+  'http://127.0.0.1:5500'
+].filter(Boolean);
+
 app.use(cors({
-  origin: true, // Acepta peticiones del frontend local
+  origin: (origin, callback) => {
+    // Permitir peticiones sin origin (como llamadas servidor a servidor, Postman o requests.http)
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Acceso no permitido por CORS'));
+  },
   credentials: true
 }));
 

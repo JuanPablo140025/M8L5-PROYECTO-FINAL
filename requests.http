@@ -1,12 +1,9 @@
 ### Variables
-# Cambia el '#' de lugar según dónde quieras probar (Local o Render)
-@host = https://m8l5-proyecto-final.onrender.com
-# @host = http://localhost:3000
-
+@host = https://m8l5-proyecto-final.onrender.com/api
 @token = TU_TOKEN_JWT_AQUI
 
 ### 1. Chequeo de Salud
-GET {{host}}/salud
+GET https://m8l5-proyecto-final.onrender.com/salud
 
 ### 2. Registro de Usuario Normal
 POST {{host}}/auth/registro
@@ -23,8 +20,8 @@ POST {{host}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "jugador@retroquest.com",
-  "password": "AdminPass123!"
+  "email": "juan.test@example.com",
+  "password": "Password123!"
 }
 
 ### 4. Obtener mis juegos
@@ -44,31 +41,26 @@ Content-Type: application/json
   "rating": 5
 }
 
-### 6. Actualizar juego (Reemplaza el '1' por el ID de tu juego)
+### 6. Actualizar juego (Parcial)
 PUT {{host}}/juegos/1
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
   "estado": "Completado",
-  "horas_jugadas": 15,
-  "rating": 5
+  "horas_jugadas": 15
 }
 
-### 7. Eliminar juego (Reemplaza el '1' por el ID de tu juego)
-DELETE {{host}}/juegos/1
-Authorization: Bearer {{token}}
-
-### 8. Ruta Admin
+### 7. Ruta Admin
 GET {{host}}/admin/estadisticas
 Authorization: Bearer {{token}}
 
 
 # ========================================================
-# PRUEBAS DE SEGURIDAD QUE DEBEN FALLAR (OBLIGATORIAS)
+# PRUEBAS DE SEGURIDAD QUE DEBEN FALLAR
 # ========================================================
 
-### Caso Falla 1: Inyección SQL (Debe ser bloqueado)
+### Caso Falla 1: Inyección SQL (Devuelve 401/400)
 POST {{host}}/auth/login
 Content-Type: application/json
 
@@ -77,14 +69,14 @@ Content-Type: application/json
   "password": "password"
 }
 
-### Caso Falla 2: Sin Token (Debe responder 401 Unauthorized)
+### Caso Falla 2: Sin Token (Devuelve 401 Unauthorized)
 GET {{host}}/juegos
 
-### Caso Falla 3: Input Inválido (Debe responder 400 Bad Request)
+### Caso Falla 3: Input Inválido (Devuelve 400 Bad Request)
 POST {{host}}/juegos
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "horas_jugadas": 10
+  "horas_jugadas": -10
 }
